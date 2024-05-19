@@ -17,7 +17,15 @@ module.exports = {
       backgroundOpacity: {
         '75' : '0.75',
         '40' : '0.4',
-      }
+      },
+      colors: {
+        red: {
+          '600': '#C53017',  // Custom red 600
+        },
+        black: '#000000', 
+        white: '#FFFFFF', 
+        grey: '#F1F1F1'   
+      },
     },
     fontSize: {
       'xs': '.75rem',
