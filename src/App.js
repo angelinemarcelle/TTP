@@ -19,6 +19,7 @@ import SurveyNo8 from './components/survey/SurveyNo8';
 import SurveyNo9 from './components/survey/SurveyNo9';
 import MatchedBuddies from './components/survey/MatchedBuddies';
 import AboutUs from './components/AboutUs';
+import ImageSlider from './components/AboutUs/ImageSlider';
 
 
 function App() {
