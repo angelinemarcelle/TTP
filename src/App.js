@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import EventSlider from './components/EventSlider';
-import ImageGallery from './components/MentorBox';
+import ImageGallery from './components/MentorGallery';
 import BuddiesGallery from './components/BuddiesGallery';
+import MentorGallery from './components/MentorGallery';
 import TimerCountdown from './components/TimerCountdown';
 import LogInBox from './components/LogInBox';
 import UpdateProfileBox from './components/UpdateProfileBox';
@@ -19,7 +20,7 @@ import SurveyNo8 from './components/survey/SurveyNo8';
 import SurveyNo9 from './components/survey/SurveyNo9';
 import MatchedBuddies from './components/survey/MatchedBuddies';
 import AboutUs from './components/AboutUs';
-import ImageSlider from './components/AboutUs/ImageSlider';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -41,7 +42,11 @@ function App() {
         </Routes>
       </div> */}
       <Navbar />
+      <EventSlider />
       <AboutUs />
+      <Footer />
+      <MentorGallery />
+      <BuddiesGallery />
       
     </Router>
   );
