@@ -21,6 +21,7 @@ import SurveyNo9 from './components/survey/SurveyNo9';
 import MatchedBuddies from './components/survey/MatchedBuddies';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
+import ImageSlider from './components/AboutUs/ImageSlider'
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         </Routes>
       </div> */}
       <Navbar />
-      <EventSlider />
+      <ImageSlider />
       <AboutUs />
       <Footer />
       <MentorGallery />
