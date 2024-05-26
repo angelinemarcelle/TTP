@@ -27,7 +27,7 @@ import ImageSlider from './components/AboutUs/ImageSlider'
 function App() {
   return (
     <Router>
-      {/* <div>
+      <div>
         <Routes>
           <Route path="/" element={<SurveyNo1 />} />
           <Route path="/survey2" element={<SurveyNo2 />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path="/MatchedBuddies" element={<MatchedBuddies buddyName="John Doe" />} />
 
         </Routes>
-      </div> */}
+      </div>
       <Navbar />
       <ImageSlider />
       <AboutUs />

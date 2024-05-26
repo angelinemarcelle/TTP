@@ -1,8 +1,8 @@
 import os
 from fastapi import FastAPI
 import chromadb
-import supabase
-from supabase import create_client, Client
+from supabase import create_client
+from pydantic import BaseModel
 
 from dotenv import load_dotenv 
 load_dotenv() 
@@ -41,7 +41,6 @@ async def recommend_article(
 
     Parameters:
         user_id (int): The ID of the user.
-        topic (str): The topic for which an article is recommended.
 
     Returns:
         int: The ID of the recommended article.
@@ -82,6 +81,112 @@ async def recommend_article(
         return {
             "recommended_articles": recommended_articles,
         }
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}
+
+@app.get("/recommend_buddy/")
+async def recommend_buddy(
+    user_id: int,
+):
+    """
+    Recommends a buddy based on survey result.
+
+    Parameters:
+        user_id : The ID of the user 
+
+    Returns:
+        list: The ID of the buddies.
+    """
+    
+    ### Logic
+    '''
+    1. Get the user id
+    2. Get the recommended buddy based on the query from the vector database
+    '''
+    ###
+
+    try:
+        
+        # Get Collection
+        buddy_collection = chroma_client.get_collection('buddy')
+
+        # Get User
+        user = buddy_collection.get(str(user_id))
+
+        # Get Query Sentence
+        query_sentence = user['documents'][0]
+        
+        # Get recommended buddy
+        result = buddy_collection.query(
+            query_texts=query_sentence,
+            n_results=1,
+            where={
+                "$and" : [
+                    {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},      
+                    {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},
+
+                    {"interaction_frequency" : user['metadatas'][0]['interaction_frequency']},
+
+                    {"meeting_preference" :  user['metadatas'][0]['meeting_preference']},
+
+                    {"email" :  {"$ne" : user['metadatas'][0]['email']}},
+                ]
+            }
+        )
+
+        response_body = {
+            "user_id" : int(result['ids'][0][0]),
+            "details" : result['metadatas'][0][0]
+        }
+
+        return response_body
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}
+    
+
+ 
+@app.get("/recommend_mentor/")
+async def recommend_mentor(
+    mentor_request : str,
+):
+    """
+    Recommends a mentor based on mentor request.
+
+    Parameters:
+        mentor_request (str): explanation about preferred mentor
+
+    Returns:
+        int: The ID of the mentor.
+    """
+    
+    ### Logic
+    '''
+    1. Get the recommended mentor based on the query from the vector database
+    '''
+    ###
+
+    try:
+    
+        # Get Collection
+        mentor_collection = chroma_client.get_collection('mentor')
+        
+        result = mentor_collection.query(
+            query_texts=mentor_request,
+            n_results=1,
+        )
+        
+        recommended_mentor_id = int(result['ids'][0][0])
+        
+        # Get detail from supabase
+        mentor_info = supabase_client.table("mentor").select("*").eq('mentor_id', recommended_mentor_id).execute().model_dump()['data'][0]
+        
+        return mentor_info
         
     
     except Exception as e:

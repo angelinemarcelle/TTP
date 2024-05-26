@@ -1,0 +1,11 @@
+mentor_id, name, department, position, description, email, specialization
+1, John Doe, Finance, Financial Analyst, Analyzes financial data and provides investment guidance., john.doe@bank.com, Investment Analysis
+2, Jane Smith, IT, Software Developer, Develops and maintains bank software systems., jane.smith@bank.com, System Development
+3, Michael Brown, Risk Management, Risk Manager, Manages risks to minimize losses through effective strategies and controls., michael.brown@bank.com, Risk Assessment
+4, Emily White, Human Resources, HR Manager, Oversees recruitment, training, and employee relations within the bank., emily.white@bank.com, Employee Relations
+5, Alex Johnson, Compliance, Compliance Officer, Ensures the bank adheres to legal standards and in-house policies., alex.johnson@bank.com, Regulatory Compliance
+6, Linda Green, Marketing, Marketing Director, Directs the bank's marketing strategies and campaigns., linda.green@bank.com, Strategic Marketing
+7, Robert Garcia, IT, Network Administrator, Responsible for maintaining the bank's computer networks., robert.garcia@bank.com, Network Security
+8, Sarah Miller, Legal, Legal Advisor, Provides legal advice and supports litigation processes., sarah.miller@bank.com, Banking Law
+9, James Wilson, Finance, Treasurer, Manages the organization’s budget, investments, and makes forecasts predictions., james.wilson@bank.com, Financial Management
+10, Patricia Taylor, Operations, Operations Manager, Manages daily operations and ensures efficient process workflow., patricia.taylor@bank.com, Operational Efficiency
