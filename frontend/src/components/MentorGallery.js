@@ -11,7 +11,8 @@ function MentorGallery() {
   ];
 
   return (
-    <div className="flex flex-col justify-center items-center bg-black py-8">
+    <div className="flex flex-col justify-center items-center bg-black">
+      <div className="py-20"></div>
       <div className="text-center mb-10">
           <h1 className="text-5xl font-bold text-white uppercase tracking-wider">Meet Your Mentors</h1>
           <p className="text-xl text-gray-300">Connect and get inspired!</p>

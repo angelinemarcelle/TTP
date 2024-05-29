@@ -24,68 +24,22 @@ async def startup_event():
     supabase_key = os.getenv("SUPABASE_KEY")
     supabase_client = create_client(supabase_url, supabase_key)
     
-    
-@app.get("/")
-async def root():
-    """
-    Returns a JSON response with a message "Hello World".
-    """
-    return {"message": "Hello World"}
+class SurveyResults(BaseModel):
+    question1: int
+    question2: str
+    question3: str
+    question4: str
+    question5: list
+    question6: list
+    question7: str
+    question8: list
 
-@app.get("/recommend_article/")
-async def recommend_article(
-    user_id: int,
-):
-    """
-    Recommends an article based on the given user ID and topic.
-
-    Parameters:
-        user_id (int): The ID of the user.
-
-    Returns:
-        int: The ID of the recommended article.
-    """
-    
-    ### Logic
-    '''
-    1. Check if user ID has filled the preferred topics (check from user database)
-    2. If yes, recommend an article based on the preferred topics
-    3. if no, return error message
-    '''
-    ###
-
-    try:
-        
-        # Get user preferences
-        user_info = supabase_client.table("user").select("*").eq('user_UID', 1).execute()
-        preferred_topics = user_info.model_dump()['data'][0]['preferred_topic']
-    
-        # Get Collection
-        article_collection = chroma_client.get_collection('article')
-        
-        query_sentences = "articles about " + ", ".join(preferred_topics)
-        
-        result = article_collection.query(
-            query_texts=query_sentences,
-            n_results=3,
-        )
-        
-        recommended_article_ids = [int(article_id) for article_id in result['ids'][0]]
-        
-        # Get detail from supabase
-        recommended_articles = []
-        for article_id in recommended_article_ids:
-            article_info = supabase_client.table("article").select("*").eq('article_id', article_id).execute()
-            recommended_articles.append(article_info.model_dump()['data'][0])
-        
-        return {
-            "recommended_articles": recommended_articles,
-        }
-        
-    
-    except Exception as e:
-        return {"message": "Error",
-                "error": str(e)}
+@app.post("/save_survey_results")
+async def save_survey_results(data: SurveyResults):
+    # Process the survey data here
+    # For example, save to a database or perform other logic
+    print(data)
+    return {"message": "Survey results saved successfully", "data": data.dict()}
 
 @app.get("/recommend_buddy/")
 async def recommend_buddy(
@@ -187,6 +141,62 @@ async def recommend_mentor(
         mentor_info = supabase_client.table("mentor").select("*").eq('mentor_id', recommended_mentor_id).execute().model_dump()['data'][0]
         
         return mentor_info
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}
+
+
+@app.get("/recommend_article/")
+async def recommend_article(
+    user_id: int,
+):
+    """
+    Recommends an article based on the given user ID and topic.
+
+    Parameters:
+        user_id (int): The ID of the user.
+
+    Returns:
+        int: The ID of the recommended article.
+    """
+    
+    ### Logic
+    '''
+    1. Check if user ID has filled the preferred topics (check from user database)
+    2. If yes, recommend an article based on the preferred topics
+    3. if no, return error message
+    '''
+    ###
+
+    try:
+        
+        # Get user preferences
+        user_info = supabase_client.table("user").select("*").eq('user_UID', 1).execute()
+        preferred_topics = user_info.model_dump()['data'][0]['preferred_topic']
+    
+        # Get Collection
+        article_collection = chroma_client.get_collection('article')
+        
+        query_sentences = "articles about " + ", ".join(preferred_topics)
+        
+        result = article_collection.query(
+            query_texts=query_sentences,
+            n_results=3,
+        )
+        
+        recommended_article_ids = [int(article_id) for article_id in result['ids'][0]]
+        
+        # Get detail from supabase
+        recommended_articles = []
+        for article_id in recommended_article_ids:
+            article_info = supabase_client.table("article").select("*").eq('article_id', article_id).execute()
+            recommended_articles.append(article_info.model_dump()['data'][0])
+        
+        return {
+            "recommended_articles": recommended_articles,
+        }
         
     
     except Exception as e:

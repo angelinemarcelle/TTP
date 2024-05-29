@@ -21,17 +21,17 @@ function Navbar() {
         <div className="flex justify-end items-center px-3 pr-10">
           <ol className="flex items-center space-x-4">
             <li>
-              <a href="/events" className="px-4 py-2 rounded-md text-white hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
+              <a href="/events" className="px-4 py-2 rounded-md text-black hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
                 Events
               </a>
             </li>
             <li>
-              <a href="/mentorship" className="px-4 py-2 rounded-md text-white hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
+              <a href="/mentorbuddy" className="px-4 py-2 rounded-md text-black hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
                 Mentorship
               </a>
             </li>
             <li>
-              <a href="/articles" className="px-4 py-2 rounded-md text-white hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
+              <a href="/articles" className="px-4 py-2 rounded-md text-black hover:bg-gray-300 hover:bg-opacity-40 transition duration-150 ease-in-out">
                 Articles
               </a>
             </li>
