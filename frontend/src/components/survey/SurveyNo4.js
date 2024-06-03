@@ -1,31 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router v6
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo4 = () => {
-  const navigate = useNavigate();
+const SurveyNo4 = ({ updateResponses }) => {
+  const [selectedFrequency, setSelectedFrequency] = useState('');
 
-  // Scroll to the top of the page for a smooth transition
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  const handleFrequencyChange = (event) => {
+    setSelectedFrequency(event.target.value);
+    updateResponses('question4', event.target.value);
   };
 
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+  // const handleSubmit = (event) => {
+  //   event.preventDefault(); // Prevent the default form submission behavior
 
-    // Extract the value of the selected radio button
-    const frequency = event.target.elements.interactionFrequency.value;
-
-    // Navigate to the next survey after a delay and scroll to top
-    setTimeout(() => {
-      scrollToTop();
-      navigate('/survey5'); // Adjust the path as necessary
-    }, 1500); // Delay of 1500 milliseconds before navigating
-  };
+  //   // Navigate to the next survey after a delay and scroll to top
+  //   setTimeout(() => {
+  //     window.scrollTo(0, 0);
+  //     navigate('/survey5'); // Adjust the path as necessary
+  //   }, 1500); // Delay of 1500 milliseconds before navigating
+  // };
 
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
@@ -39,24 +32,22 @@ const SurveyNo4 = () => {
         {/* Question Column */}
         <div className="flex flex-col w-3/4 pl-5">
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">How often would you like to interact with your buddy?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
-              <label className="block mb-4 text-red-600">
-                <input type="radio" name="interactionFrequency" value="Daily" className="mr-2"/>
-                Daily
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="radio" name="interactionFrequency" value="Weekly" className="mr-2"/>
-                Weekly
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="radio" name="interactionFrequency" value="Bi-weekly" className="mr-2"/>
-                Bi-weekly
-              </label>
-              <label className="block text-red-600">
-                <input type="radio" name="interactionFrequency" value="Monthly" className="mr-2"/>
-                Monthly
-              </label>
+              {/* Radio options dynamically generated */}
+              {['Daily', 'Weekly', 'Bi-weekly', 'Monthly'].map((frequency) => (
+                <label key={frequency} className="block mb-4 text-red-600">
+                  <input
+                    type="radio"
+                    name="interactionFrequency"
+                    value={frequency}
+                    className="mr-2"
+                    onChange={handleFrequencyChange}
+                    checked={selectedFrequency === frequency}
+                  />
+                  {frequency}
+                </label>
+              ))}
             </div>
           </form>
         </div>

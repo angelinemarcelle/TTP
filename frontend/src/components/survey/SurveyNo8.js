@@ -1,44 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png"; 
+import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo8 = () => {
-  const navigate = useNavigate();
-  const [selectedGoals, setSelectedGoals] = useState({});
+const SurveyNo8 = ({ updateResponses }) => {
+  const [selectedGoals, setSelectedGoals] = useState([]);
   const [otherGoal, setOtherGoal] = useState('');
 
   const handleGoalChange = (event) => {
-    const { name, checked } = event.target;
-    setSelectedGoals(prev => ({
-      ...prev,
-      [name]: checked
-    }));
+    const goal = event.target.value;
+    if (event.target.checked) {
+      setSelectedGoals([...selectedGoals, goal]);
+      updateResponses('question8', selectedGoals);
+    } else {
+      setSelectedGoals(selectedGoals.filter(item => item !== goal));
+      updateResponses('question8', selectedGoals);
+    }
   };
 
   const handleOtherGoalChange = (event) => {
     setOtherGoal(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    console.log('Selected Goals:', selectedGoals);
-    if (selectedGoals.Other) {
-      console.log('Other Goal:', otherGoal);
-    }
-
-    // Smooth scroll and navigation
-    scrollToTop();
-    setTimeout(() => {
-      navigate('/survey9');
-    }, 1500);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    updateResponses('question8', event.target.value);
   };
 
   return (
@@ -49,34 +29,34 @@ const SurveyNo8 = () => {
         </div>
         <div className="flex flex-col w-3/4 pl-5">
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">What is your primary goal for participating in the buddy program?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="Networking" onChange={handleGoalChange} checked={selectedGoals.Networking || false} className="mr-2"/>
+                <input type="checkbox" value="Networking" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Networking')} />
                 Networking
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="SkillDevelopment" onChange={handleGoalChange} checked={selectedGoals.SkillDevelopment || false} className="mr-2"/>
-                Skill development
+                <input type="checkbox" value="Skill Development" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Skill Development')} />
+                Skill Development
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="CulturalIntegration" onChange={handleGoalChange} checked={selectedGoals.CulturalIntegration || false} className="mr-2"/>
-                Cultural integration
+                <input type="checkbox" value="Cultural Integration" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Cultural Integration')} />
+                Cultural Integration
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="ProvidingMentorship" onChange={handleGoalChange} checked={selectedGoals.ProvidingMentorship || false} className="mr-2"/>
-                Providing mentorship
+                <input type="checkbox" value="Providing Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Providing Mentorship')} />
+                Providing Mentorship
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="ReceivingMentorship" onChange={handleGoalChange} checked={selectedGoals.ReceivingMentorship || false} className="mr-2"/>
-                Receiving mentorship
+                <input type="checkbox" value="Receiving Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Receiving Mentorship')} />
+                Receiving Mentorship
               </label>
-              <label className="block text-red-600">
-                <input type="checkbox" name="Other" onChange={handleGoalChange} checked={selectedGoals.Other || false} className="mr-2"/>
+              <label className="block mb-4 text-red-600">
+                <input type="checkbox" value="Other" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Other')} />
                 Other
               </label>
-              {selectedGoals.Other && (
-                <input
+              {selectedGoals.includes('Other') && (
+                <input 
                   type="text"
                   value={otherGoal}
                   onChange={handleOtherGoalChange}

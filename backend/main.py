@@ -25,6 +25,7 @@ async def startup_event():
     supabase_client = create_client(supabase_url, supabase_key)
     
 class SurveyResults(BaseModel):
+    buddy_id: int
     question1: int
     question2: str
     question3: str
@@ -32,14 +33,23 @@ class SurveyResults(BaseModel):
     question5: list
     question6: list
     question7: str
-    question8: list
+    question8: str
 
 @app.post("/save_survey_results")
 async def save_survey_results(data: SurveyResults):
-    # Process the survey data here
-    # For example, save to a database or perform other logic
-    print(data)
-    return {"message": "Survey results saved successfully", "data": data.dict()}
+
+    data, count = supabase_client.table('buddy').update({"buddy_id": data.buddy_id,
+                                                         "years_of_experience": data.question1, 
+                                                         "role": data.question2,
+                                                         "professional_interest": data.question3,
+                                                         "interaction_frequency": data.question4,
+                                                         "hobby": str(data.question5),
+                                                         "language": str(data.question6),
+                                                         "meeting_preference": data.question7,
+                                                         "buddy_program_goal": data.question8}).eq('buddy_id', data.buddy_id).execute()
+
+
+    return {"message": "Survey results saved successfully"}
 
 @app.get("/recommend_buddy/")
 async def recommend_buddy(
@@ -202,4 +212,4 @@ async def recommend_article(
     except Exception as e:
         return {"message": "Error",
                 "error": str(e)}
-    
+

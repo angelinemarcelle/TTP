@@ -5,21 +5,24 @@ const SubmitSurvey = ({ surveyData }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    try {
-      console.log("Submitting survey data:", surveyData);
-      // Here you would typically make an API call to submit your survey data
-      // const response = await fetch('https://api.yourdomain.com/submit_survey', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(surveyData)
-      // });
+    // try {
+    //   console.log("Submitting survey data:", surveyData);
 
-      // Assuming the response is successful
-      navigate('/survey-completed');  // Redirect to a confirmation or thank you page
-    } catch (error) {
-      console.error('Failed to submit survey:', error);
-      // Handle failure (e.g., show an error message to the user)
-    }
+    //   // Use Axios for the API call
+    //   await axios.post('https://api.yourdomain.com/submit_survey', surveyData, {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+
+    //   // Navigate to the thank-you page on successful submission
+    //   navigate('/survey-completed');
+    // } catch (error) {
+    //   console.error('Failed to submit survey:', error);
+    //   // Handle errors more gracefully
+    //   alert(`Failed to submit survey: ${error.response ? error.response.data.message : 'Server unreachable'}`);
+    // }
+    console.log(surveyData)
   };
 
   return (

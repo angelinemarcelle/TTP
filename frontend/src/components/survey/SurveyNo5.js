@@ -1,24 +1,30 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo5 = () => {
-  const navigate = useNavigate();
+const SurveyNo5 = ({ updateResponses }) => {
+  const [selectedHobbies, setSelectedHobbies] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    // Here, you can handle the checked values. Example:
-    const formData = new FormData(event.target);
-    const selectedHobbies = formData.getAll('hobbies');
-    console.log('Selected Hobbies:', selectedHobbies); // Process or save the data as required
-
-    // Smooth scroll and navigation
-    scrollToTop();
-    setTimeout(() => {
-      navigate('/survey6'); // Adjust the path as necessary
-    }, 1500); // Delay of 1500 milliseconds before navigating
+  const handleHobbyChange = (event) => {
+    const hobby = event.target.value;
+    if (event.target.checked) {
+      setSelectedHobbies([...selectedHobbies, hobby]);
+      updateResponses('question5', event.target.value);
+    } else {
+      setSelectedHobbies(selectedHobbies.filter(item => item !== hobby));
+      updateResponses('question5', event.target.value);
+    }
   };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault(); // Prevent the default form submission behavior
+  //   updateResponses('question5', selectedHobbies); // Update responses with selected hobbies
+
+  //   // Smooth scroll and navigation
+  //   scrollToTop();
+  //   setTimeout(() => {
+  //     navigate('/survey6'); // Adjust the path as necessary
+  //   }, 1500); // Delay of 1500 milliseconds before navigating
+  // };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -39,32 +45,21 @@ const SurveyNo5 = () => {
         {/* Question Column */}
         <div className="flex flex-col w-3/4 pl-5">
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">What are your main hobbies or interests outside of work?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="hobbies" value="Sports & Working Out" className="mr-2"/>
-                Sports & Working Out
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="hobbies" value="Arts and Crafts" className="mr-2"/>
-                Arts and Crafts
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="hobbies" value="Reading" className="mr-2"/>
-                Reading
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="hobbies" value="Tech Gadgets" className="mr-2"/>
-                Tech Gadgets
-              </label>
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" name="hobbies" value="Travel" className="mr-2"/>
-                Travel
-              </label>
-              <label className="block text-red-600">
-                <input type="checkbox" name="hobbies" value="Food & Cooking" className="mr-2"/>
-                Food & Cooking
-              </label>
+              {['Sports & Working Out', 'Arts and Crafts', 'Reading', 'Tech Gadgets', 'Travel', 'Food & Cooking'].map(hobby => (
+                <label key={hobby} className="block mb-4 text-red-600">
+                  <input
+                    type="checkbox"
+                    name="hobbies"
+                    value={hobby}
+                    className="mr-2"
+                    onChange={handleHobbyChange}
+                    checked={selectedHobbies.includes(hobby)}
+                  />
+                  {hobby}
+                </label>
+              ))}
             </div>
           </form>
         </div>

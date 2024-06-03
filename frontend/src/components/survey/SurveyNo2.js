@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo2 = () => {
-  const navigate = useNavigate();
+const SurveyNo2 = ({ updateResponses }) => {
+  // const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState('');
   const [otherRole, setOtherRole] = useState('');
 
@@ -11,18 +10,20 @@ const SurveyNo2 = () => {
     setSelectedRole(event.target.value);
     if (event.target.value !== 'Others') {
       setOtherRole(''); // Clear other role if not selected
+      updateResponses('question2', event.target.value);
     }
   };
 
   const handleOtherRoleChange = (event) => {
     setOtherRole(event.target.value);
+    updateResponses('question2', event.target.value);
   };
 
-  const handleNext = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    navigate('/survey3');
-  };
-
+  // const handleNext = (event) => {
+  //   event.preventDefault(); // Prevent default form submission behavior
+  //   navigate('/survey3');
+  // };
+  
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
       <div className="relative flex flex-row items-center bg-white bg-opacity-40 rounded-2xl shadow-xl px-5 py-20 w-full max-w-3xl overflow-hidden">
@@ -31,7 +32,7 @@ const SurveyNo2 = () => {
         </div>
         <div className="flex flex-col w-3/4 pl-5 overflow-auto">
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">Please select the option that best describes your current role at the bank:</h1>
-          <form className="w-full" onSubmit={handleNext}>
+          <form className="w-full">
             {/* Radio options here */}
             <div className="text-left inner-form w-auto mx-auto">
               {/* Iterate over roles if possible or continue with manual label inputs */}

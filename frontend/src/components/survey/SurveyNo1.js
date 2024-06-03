@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo1 = ({ scrollToNext }) => {
+const SurveyNo1 = ({ updateResponses }) => {
   const [years, setYears] = useState('');
 
-  // Function to handle input change and scroll to the next survey section
   const handleInputChange = (e) => {
     setYears(e.target.value);
+    updateResponses('question1', e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    scrollToNext();  // This function is passed from the parent component
-  };
 
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
@@ -26,7 +22,7 @@ const SurveyNo1 = ({ scrollToNext }) => {
         {/* Question Column */}
         <div className="flex flex-col w-3/4 pl-5"> 
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">How long have you worked at UBS?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
               <input 
                 type="number" 

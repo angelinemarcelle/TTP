@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const SurveyNo3 = () => {
-  const navigate = useNavigate();
+const SurveyNo3 = ({ updateResponses }) => {
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [otherInterest, setOtherInterest] = useState('');
 
@@ -11,24 +9,28 @@ const SurveyNo3 = () => {
     const interest = event.target.value;
     if (event.target.checked) {
       setSelectedInterests([...selectedInterests, interest]);
+      updateResponses('question3', event.target.value);
     } else {
       setSelectedInterests(selectedInterests.filter(item => item !== interest));
+      updateResponses('question3', event.target.value);
     }
   };
 
   const handleOtherInterestChange = (event) => {
     setOtherInterest(event.target.value);
+    updateResponses('question3', event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Ensure that at least one interest is selected or specified in 'Others'
-    if (selectedInterests.length > 0 || otherInterest.trim() !== '') {
-      navigate('/survey4');
-    } else {
-      alert('Please select at least one area of interest.');
-    }
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Ensure that at least one interest is selected or specified in 'Others'
+  //   if (selectedInterests.length > 0 || otherInterest.trim() !== '') {
+  //     navigate('/survey4');
+  //   } else {
+  //     alert('Please select at least one area of interest.');
+  //   }
+  // };
+
 
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
@@ -41,7 +43,7 @@ const SurveyNo3 = () => {
         {/* Question Column */}
         <div className="flex flex-col w-3/4 pl-5">
           <h1 className="text-2xl font-bold text-red-600 mb-6 pr-5">What are your key areas of professional development interest?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
               {/* Checkbox inputs for selecting multiple interests */}
               <label className="block mb-4 text-red-600">
