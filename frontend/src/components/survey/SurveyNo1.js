@@ -4,9 +4,9 @@ import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 const SurveyNo1 = ({ updateResponses }) => {
   const [years, setYears] = useState('');
 
-  const handleInputChange = (e) => {
-    setYears(e.target.value);
-    updateResponses('question1', e.target.value);
+  const handleInputChange = (event) => {
+    setYears(event.target.value);
+    updateResponses('question1', event.target.value);
   };
 
 

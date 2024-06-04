@@ -14,7 +14,7 @@ import SubmitSurvey from '../components/survey/SubmitSurvey';
 
 const SurveyPage = () => {
     const [surveyResponses, setSurveyResponses] = useState({
-        buddy_id: '',
+        buddy_id: 21,
         question1: '',
         question2: '',
         question3: '',
@@ -41,7 +41,7 @@ const SurveyPage = () => {
         <SurveyNo8 updateResponses={updateResponses} />
 
         {/* Render other survey components with updateResponses passed as props */}
-        <SubmitSurvey responses={surveyResponses} />
+        <SubmitSurvey surveyData={surveyResponses} />
       </div>
     );
   };

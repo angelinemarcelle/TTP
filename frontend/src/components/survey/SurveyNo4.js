@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router v6
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
 const SurveyNo4 = ({ updateResponses }) => {
@@ -9,16 +8,6 @@ const SurveyNo4 = ({ updateResponses }) => {
     setSelectedFrequency(event.target.value);
     updateResponses('question4', event.target.value);
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault(); // Prevent the default form submission behavior
-
-  //   // Navigate to the next survey after a delay and scroll to top
-  //   setTimeout(() => {
-  //     window.scrollTo(0, 0);
-  //     navigate('/survey5'); // Adjust the path as necessary
-  //   }, 1500); // Delay of 1500 milliseconds before navigating
-  // };
 
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">

@@ -1,47 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png"; 
 
 const SurveyNo6 = ({ updateResponses }) => {
-  const navigate = useNavigate();
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [otherLanguage, setOtherLanguage] = useState('');
 
   const handleLanguageChange = (event) => {
-  const language = event.target.value;
-    if (event.target.checked) {
-      setSelectedLanguages([...selectedLanguages, language]);
-      updateResponses('question6', event.target.value);
-    } else {
-      setSelectedLanguages(selectedLanguages.filter(item => item !== language));
-      updateResponses('question6', event.target.value);
-    }
-  };
+    const language = event.target.value;
+    setSelectedLanguages(prevLanguages => {
+      const newLanguages = event.target.checked
+        ? [...prevLanguages, language]
+        : prevLanguages.filter(item => item !== language);
 
-  const handleOtherLanguageChange = (event) => {
-    setOtherLanguage(event.target.value);
-    updateResponses('question6', event.target.value);
-  };
+      // Update responses immediately after state update
+      updateResponses('question6', newLanguages);
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault(); // Prevent the default form submission behavior
-
-  //   console.log('Selected Languages:', selectedLanguages);
-  //   if (selectedLanguages.Other) {
-  //     console.log('Other Language:', otherLanguage);
-  //   }
-
-  //   // Smooth scroll and navigation
-  //   scrollToTop();
-  //   setTimeout(() => {
-  //     navigate('/survey7'); // Use the correct path for navigation
-  //   }, 1500); // Delay of 1500 milliseconds before navigating
-  // };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+      return newLanguages;
     });
   };
 

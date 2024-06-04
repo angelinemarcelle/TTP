@@ -10,25 +10,6 @@ const SurveyNo7 = ({ updateResponses }) => {
     updateResponses('question7', event.target.value);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault(); // Prevent the default form submission behavior
-
-  //   console.log('Meeting Preference:', meetingPreference);
-
-  //   // Smooth scroll and navigation
-  //   scrollToTop();
-  //   setTimeout(() => {
-  //     navigate('/survey8');
-  //   }, 1500);
-  // };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
       <div className="relative flex flex-row items-center bg-white bg-opacity-40 rounded-2xl shadow-xl px-5 py-20 w-full max-w-3xl">

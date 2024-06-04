@@ -3,21 +3,24 @@ import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
 const SurveyNo8 = ({ updateResponses }) => {
   const [selectedGoals, setSelectedGoals] = useState([]);
-  const [otherGoal, setOtherGoal] = useState('');
+
+  // const handleGoalChange = (event) => {
+  //   const goal = event.target.value;
+  //   setSelectedGoals(prevGoals => {
+  //     const newGoals = event.target.checked
+  //       ? [...prevGoals, goal]
+  //       : prevGoals.filter(item => item !== goal);
+
+  //     // Update responses immediately after state update
+  //     updateResponses('question8', newGoals);
+
+  //     return newGoals;
+  //   });
+  // };
+
 
   const handleGoalChange = (event) => {
-    const goal = event.target.value;
-    if (event.target.checked) {
-      setSelectedGoals([...selectedGoals, goal]);
-      updateResponses('question8', selectedGoals);
-    } else {
-      setSelectedGoals(selectedGoals.filter(item => item !== goal));
-      updateResponses('question8', selectedGoals);
-    }
-  };
-
-  const handleOtherGoalChange = (event) => {
-    setOtherGoal(event.target.value);
+    setSelectedGoals(event.target.value);
     updateResponses('question8', event.target.value);
   };
 
@@ -32,38 +35,25 @@ const SurveyNo8 = ({ updateResponses }) => {
           <form className="w-full">
             <div className="text-left inner-form w-auto mx-auto">
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Networking" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Networking')} />
+                <input type="radio" value="Networking" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Networking')} />
                 Networking
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Skill Development" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Skill Development')} />
+                <input type="radio" value="Skill Development" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Skill Development')} />
                 Skill Development
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Cultural Integration" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Cultural Integration')} />
+                <input type="radio" value="Cultural Integration" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Cultural Integration')} />
                 Cultural Integration
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Providing Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Providing Mentorship')} />
+                <input type="radio" value="Providing Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Providing Mentorship')} />
                 Providing Mentorship
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Receiving Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Receiving Mentorship')} />
+                <input type="radio" value="Receiving Mentorship" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Receiving Mentorship')} />
                 Receiving Mentorship
               </label>
-              <label className="block mb-4 text-red-600">
-                <input type="checkbox" value="Other" className="mr-2" onChange={handleGoalChange} checked={selectedGoals.includes('Other')} />
-                Other
-              </label>
-              {selectedGoals.includes('Other') && (
-                <input 
-                  type="text"
-                  value={otherGoal}
-                  onChange={handleOtherGoalChange}
-                  placeholder="Please specify"
-                  className="block w-[50vh] p-2 border border-red-600 rounded-md mb-4"
-                />
-              )}
             </div>
           </form>
         </div>

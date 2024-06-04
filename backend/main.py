@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import chromadb
 from supabase import create_client
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 from dotenv import load_dotenv 
 load_dotenv() 
@@ -10,6 +11,15 @@ load_dotenv()
 app = FastAPI()
 chroma_client = None
 supabase_client = None
+
+# Configuring CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Allows specific origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.on_event("startup")
 async def startup_event():
@@ -72,46 +82,46 @@ async def recommend_buddy(
     '''
     ###
 
-    try:
+    # try:
         
-        # Get Collection
-        buddy_collection = chroma_client.get_collection('buddy')
+    # Get Collection
+    buddy_collection = chroma_client.get_collection('buddy')
 
-        # Get User
-        user = buddy_collection.get(str(user_id))
+    # Get User
+    user = buddy_collection.get(str(user_id))
 
-        # Get Query Sentence
-        query_sentence = user['documents'][0]
-        
-        # Get recommended buddy
-        result = buddy_collection.query(
-            query_texts=query_sentence,
-            n_results=1,
-            where={
-                "$and" : [
-                    {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},      
-                    {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},
+    # Get Query Sentence
+    query_sentence = user['documents'][0]
+    
+    # Get recommended buddy
+    result = buddy_collection.query(
+        query_texts=query_sentence,
+        n_results=1,
+        where={
+            "$and" : [
+                {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},      
+                {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},
 
-                    {"interaction_frequency" : user['metadatas'][0]['interaction_frequency']},
+                {"interaction_frequency" : user['metadatas'][0]['interaction_frequency']},
 
-                    {"meeting_preference" :  user['metadatas'][0]['meeting_preference']},
+                {"meeting_preference" :  user['metadatas'][0]['meeting_preference']},
 
-                    {"email" :  {"$ne" : user['metadatas'][0]['email']}},
-                ]
-            }
-        )
-
-        response_body = {
-            "user_id" : int(result['ids'][0][0]),
-            "details" : result['metadatas'][0][0]
+                {"email" :  {"$ne" : user['metadatas'][0]['email']}},
+            ]
         }
+    )
+    print(result)
+    response_body = {
+        "user_id" : int(result['ids'][0][0]),
+        "details" : result['metadatas'][0][0]
+    }
 
-        return response_body
+    return response_body
         
     
-    except Exception as e:
-        return {"message": "Error",
-                "error": str(e)}
+    # except Exception as e:
+    # #     return {"message": "Error",
+    # #             "error": str(e)}
     
 
  

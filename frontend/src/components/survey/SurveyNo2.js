@@ -2,28 +2,13 @@ import React, { useState } from 'react';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
 const SurveyNo2 = ({ updateResponses }) => {
-  // const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState('');
-  const [otherRole, setOtherRole] = useState('');
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
-    if (event.target.value !== 'Others') {
-      setOtherRole(''); // Clear other role if not selected
-      updateResponses('question2', event.target.value);
-    }
-  };
-
-  const handleOtherRoleChange = (event) => {
-    setOtherRole(event.target.value);
     updateResponses('question2', event.target.value);
   };
 
-  // const handleNext = (event) => {
-  //   event.preventDefault(); // Prevent default form submission behavior
-  //   navigate('/survey3');
-  // };
-  
   return (
     <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
       <div className="relative flex flex-row items-center bg-white bg-opacity-40 rounded-2xl shadow-xl px-5 py-20 w-full max-w-3xl overflow-hidden">
@@ -56,19 +41,6 @@ const SurveyNo2 = ({ updateResponses }) => {
                 <input type="radio" name="role" value="Operations" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Operations'}/>
                 Sales/Marketing
               </label>
-              <label className="block mb-4 text-red-600">
-                <input type="radio" name="role" value="Others" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Others'}/>
-                Others
-              </label>
-              {selectedRole === 'Others' && (
-                <input 
-                  type="text"
-                  value={otherRole}
-                  onChange={handleOtherRoleChange}
-                  placeholder="Please specify your role"
-                  className="block w-[50vh] p-2 border border-red-600 rounded-md mb-4"
-                />
-              )}
             </div>
           </form>
         </div>
