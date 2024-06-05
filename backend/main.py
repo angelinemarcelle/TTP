@@ -92,7 +92,8 @@ async def recommend_buddy(
 
     # Get Query Sentence
     query_sentence = user['documents'][0]
-    
+    print(query_sentence)
+
     # Get recommended buddy
     result = buddy_collection.query(
         query_texts=query_sentence,
@@ -100,7 +101,7 @@ async def recommend_buddy(
         where={
             "$and" : [
                 {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},      
-                {"years_of_experience" : {"$gte" : user['metadatas'][0]['years_of_experience'] - 2}},
+                {"years_of_experience" : {"$lte" : user['metadatas'][0]['years_of_experience'] + 2}},
 
                 {"interaction_frequency" : user['metadatas'][0]['interaction_frequency']},
 
@@ -111,6 +112,7 @@ async def recommend_buddy(
         }
     )
     print(result)
+
     response_body = {
         "user_id" : int(result['ids'][0][0]),
         "details" : result['metadatas'][0][0]
