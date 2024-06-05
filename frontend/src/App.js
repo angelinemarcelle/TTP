@@ -14,6 +14,7 @@ import MentorBuddyPage from './pages/mentorbuddy_page';
 import EventsPage from './pages/events_page';
 import ErrorPage from './pages/error_page';
 import ArticlesPage from './pages/articles_page';
+import MatchedMentorship from './components/survey/MatchedMentorship';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/survey" element={<SurveyPrompt />} />
         <Route path="/fullsurvey" element={<SurveyPage />} />
+        <Route path="/matched-mentorship" element={<MatchedMentorship />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

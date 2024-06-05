@@ -29,7 +29,9 @@ const SubmitSurvey = ({ surveyData }) => {
 
       // Fetch buddy recommendation after submitting survey
       if (surveyData.buddy_id) {
-        await fetchBuddyRecommendation(surveyData.buddy_id);
+        // await fetchBuddyRecommendation(surveyData.buddy_id);
+        const buddy = await fetchBuddyRecommendation(surveyData.buddy_id);
+        navigate('/matched-mentorship', { state: { buddy } });
       }
   
     } catch (error) {

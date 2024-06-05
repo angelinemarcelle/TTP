@@ -30,7 +30,7 @@ const SurveyNo7 = ({ updateResponses }) => {
               </label>
               <label className="block mb-4 text-red-600">
                 <input type="radio" name="meetingPreference" value="Hybrid" onChange={handleMeetingChange} checked={meetingPreference === 'Hybrid'} className="mr-2"/>
-                Hybrid
+                Combination of both
               </label>
             </div>
           </form>
