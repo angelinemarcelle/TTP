@@ -1,6 +1,7 @@
 import os
-from fastapi import FastAPI
+import pandas as pd
 import chromadb
+from fastapi import FastAPI
 from supabase import create_client
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +12,95 @@ load_dotenv()
 app = FastAPI()
 chroma_client = None
 supabase_client = None
+
+def update_chromadb():
+     
+    # Indexing Articles
+    
+    articles = supabase_client.table("article").select("*").execute().model_dump()['data']
+    
+    try:
+        article_collection = chroma_client.get_collection("article")
+    except:
+        article_collection = chroma_client.create_collection("article")
+        
+    def create_article_sentence(article):
+        return f"{article['title']}. {article['short_desc']}"
+    
+    article_collection.add(
+        ids=[str(article['article_id']) for article in articles],
+        documents=[create_article_sentence(article) for article in articles],
+        metadatas=[
+            {
+                "category": article['category'],
+                "created_date": article['created_date'],
+            } for article in articles        
+        ]
+    )
+    
+    # Indexing Mentors
+    
+    mentors = supabase_client.table("mentor").select("*").execute().model_dump()['data']
+    
+    try:
+        mentor_collection = chroma_client.get_collection("mentor")
+    except:
+        mentor_collection = chroma_client.create_collection("mentor")
+    
+    def create_mentor_sentence(mentor):
+        return  f"A mentor from {mentor['department']} department, working as a {mentor['position']} " \
+                f"specializing in {mentor['specialization']}. {mentor['short_desc']}"
+                
+    mentor_collection.add(
+        ids=[str(mentor['mentor_id']) for mentor in mentors],
+        documents=[create_mentor_sentence(mentor) for mentor in mentors],
+        metadatas=[
+            {
+                "name": mentor['name'],
+                "department": mentor['department'],
+                "position": mentor['position'],
+                "short_desc": mentor['short_desc'],
+                "email": mentor['email'],
+            } for mentor in mentors        
+        ]
+    )
+    
+    # Indexing Buddies
+    
+    buddies = supabase_client.table("buddy").select("*").execute().model_dump()['data']
+    
+    try:
+        buddy_collection = chroma_client.get_collection("buddy")
+    except:
+        buddy_collection = chroma_client.create_collection("buddy")
+        
+    def create_buddy_sentence(buddy):
+        return f"A buddy from {buddy['role']}, with interest in {buddy['professional_interest']} " \
+            f"likes {', '.join(eval(buddy['hobby']))}. proficient in { ', '.join(eval(buddy['language']))} " \
+            f"with a goal in {buddy['buddy_program_goal']}"
+            
+    buddy_collection.add(
+        ids=[str(buddy['buddy_id']) for buddy in buddies],
+        documents=[create_buddy_sentence(buddy) for buddy in buddies],
+        metadatas=[
+            {
+                "name": buddy['name'],
+                "short_desc": buddy['short_desc'],
+                "email": buddy['email'],
+                "linkedin": buddy['linkedin'],
+                "instagram": buddy['instagram'],
+                "years_of_experience": buddy['years_of_experience'],
+                "role": buddy['role'],
+                "professional_interest": buddy['professional_interest'],
+                "interaction_frequency": buddy['interaction_frequency'],
+                "hobby": buddy['hobby'],
+                "language": buddy['language'],
+                "meeting_preference": buddy['meeting_preference'],
+                "buddy_program_goal": buddy['buddy_program_goal'] 
+            } for buddy in buddies        
+        ]
+    )
+        
 
 # Configuring CORS
 app.add_middleware(
@@ -24,15 +114,17 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     
-    # initialize chromadb
-    global chroma_client
-    chroma_client = chromadb.PersistentClient(path="chromadb")
-    
     # initialize supabase
     global supabase_client
     supabase_url = os.getenv("SUPABASE_URL")
     supabase_key = os.getenv("SUPABASE_KEY")
     supabase_client = create_client(supabase_url, supabase_key)
+    
+     # initialize chromadb
+    global chroma_client
+    chroma_client = chromadb.PersistentClient(path="chromadb")
+    
+    update_chromadb()
     
 class SurveyResults(BaseModel):
     buddy_id: int
@@ -57,7 +149,8 @@ async def save_survey_results(data: SurveyResults):
                                                          "language": str(data.question6),
                                                          "meeting_preference": data.question7,
                                                          "buddy_program_goal": data.question8}).eq('buddy_id', data.buddy_id).execute()
-
+    
+    update_chromadb()
 
     return {"message": "Survey results saved successfully"}
 
