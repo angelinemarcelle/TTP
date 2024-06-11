@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import EventSlider from './components/EventSlider';
-import AboutUs from './components/AboutUs';
-import ImageSlider from './components/AboutUs/ImageSlider';  // Note: Ensure usage or remove if not needed
 import SurveyPrompt from './components/survey/SurveyPrompt';
 import SurveyPage from './pages/survey_page';
 
