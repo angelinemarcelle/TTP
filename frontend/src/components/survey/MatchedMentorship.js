@@ -6,10 +6,10 @@ import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const MatchedMentorship = () => {
   const location = useLocation();
-  const mentor = location.state?.buddy;
+  const mentor = location.state?.mentor;
   const buddy = location.state?.buddy;
   console.log('Location state:', location.state);
-  console.log('Mentor data:', buddy);
+  console.log('Mentor data:', mentor);
   console.log('Buddy data:', buddy);
 
   if (!mentor && !buddy) {

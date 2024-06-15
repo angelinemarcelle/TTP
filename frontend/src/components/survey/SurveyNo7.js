@@ -11,7 +11,7 @@ const SurveyNo7 = ({ updateResponses }) => {
   };
 
   return (
-    <div className="min-h-[75vh] bg-black flex items-center justify-center p-5">
+    <div className="min-h-[50vh] bg-black flex items-center justify-center p-10">
       <div className="relative flex flex-row items-center bg-white bg-opacity-40 rounded-2xl shadow-xl px-5 py-20 w-full max-w-3xl">
         <div className="flex flex-col items-center justify-center w-1/4">
           <img src={BlackUBS3Keys} alt="Logo" className="h-24 mb-4" />

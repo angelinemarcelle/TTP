@@ -2,7 +2,7 @@ import React from 'react';
 import MentorGallery from '../components/MentorGallery';
 import BuddiesGallery from '../components/BuddiesGallery'
 import SurveyPrompt from '../components/survey/SurveyPrompt';
-import MentorPrompt from '../components/MentorPrompt';
+import MentorPrompt from '../components/survey/MentorPrompt';
 
 
 const MentorBuddyPage = () => {

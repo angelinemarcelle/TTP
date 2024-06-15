@@ -7,11 +7,13 @@ import SurveyNo5 from './SurveyNo5';
 import SurveyNo6 from './SurveyNo6';
 import SurveyNo7 from './SurveyNo7';
 import SurveyNo8 from './SurveyNo8';
-import SurveyNo9 from './SurveyNo9';
+import MentorPrompt from './MentorPrompt';
 
 const FullSurvey = () => {
   return (
     <div className="bg-grey">
+
+      <MentorPrompt />
       <SurveyNo1 />
       <SurveyNo2 />
       <SurveyNo3 />
@@ -20,7 +22,6 @@ const FullSurvey = () => {
       <SurveyNo6 />
       <SurveyNo7 />
       <SurveyNo8 />
-      <SurveyNo9 />
 
     </div>
   );
