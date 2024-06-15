@@ -26,11 +26,6 @@ const SubmitSurvey = ({ surveyData, mentorRequest }) => {
 
         console.log("Mentor recommendation received:", mentorRecommendation.data);
 
-        // Retrieve buddy data based on the buddy_id from surveyData
-        const buddyId = surveyData.buddy_id;
-        const buddyResponse = await axios.get(`http://127.0.0.1:8000/get_buddy_details/${buddyId}`);
-        const buddyData = buddyResponse.data;
-
         // Navigate to the MatchedMentorship component and pass the mentor and buddy data
         navigate('/matched-mentorship', {
           state: {
@@ -38,7 +33,7 @@ const SubmitSurvey = ({ surveyData, mentorRequest }) => {
               details: mentorRecommendation.data
             },
             buddy: {
-              details: buddyData
+              // details: buddy
             }
           }
         });
