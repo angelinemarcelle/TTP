@@ -26,19 +26,19 @@ const SurveyNo2 = ({ updateResponses }) => {
                 Operations
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="radio" name="role" value="Operations" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Operations'}/>
+                <input type="radio" name="role" value="Technology" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Technology'}/>
                 Technology
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="radio" name="role" value="Operations" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Operations'}/>
+                <input type="radio" name="role" value="Finance/Accounting" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Finance/Accounting'}/>
                 Finance/Accounting
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="radio" name="role" value="Operations" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Operations'}/>
+                <input type="radio" name="role" value="Management" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Management'}/>
                 Management
               </label>
               <label className="block mb-4 text-red-600">
-                <input type="radio" name="role" value="Operations" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Operations'}/>
+                <input type="radio" name="role" value="Sales/Marketing" className="mr-2" onChange={handleRoleChange} checked={selectedRole === 'Sales/Marketing'}/>
                 Sales/Marketing
               </label>
             </div>
