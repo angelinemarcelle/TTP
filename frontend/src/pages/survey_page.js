@@ -31,10 +31,15 @@ const SurveyPage = () => {
     const updateResponses = (key, value) => {
       setSurveyResponses(prev => ({ ...prev, [key]: value }));
     };
+
+    const updateMentorRequest = (value) => {
+      setMentorRequest(value);
+      console.log(mentorRequest)
+    };
   
     return (
       <div className="bg-grey">
-        <MentorPrompt onSubmit={setMentorRequest} />
+        <MentorPrompt updateMentorRequest={updateMentorRequest} />
         <SurveyNo1 updateResponses={updateResponses} />
         <SurveyNo2 updateResponses={updateResponses} />
         <SurveyNo3 updateResponses={updateResponses} />
