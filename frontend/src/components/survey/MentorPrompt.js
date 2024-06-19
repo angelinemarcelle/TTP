@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import BlackUBS3Keys from "../../image/logo/BlackUBS3KeysLogo.png";
 
-const MentorPrompt = ({ onSubmit }) => {
+const MentorPrompt = ({ updateMentorRequest }) => {
   const [request, setRequest] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(request);
+  const handleRoleChange = (event) => {
+    setRequest(event.target.value);
+    updateMentorRequest(event.target.value);
   };
 
   return (
@@ -20,13 +20,13 @@ const MentorPrompt = ({ onSubmit }) => {
         {/* Question Column */}
         <div className="flex flex-col w-3/4 pl-5 pr-10">
           <h1 className="text-2xl font-bold text-red-600 mb-6">What do you look for in a mentor?</h1>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full" onSubmit={handleRoleChange}>
             <div className="text-left inner-form w-auto mx-auto">
               <textarea
                 name="text"
                 className="w-full h-32 p-3 border border-red-600 rounded-md resize-none"
                 placeholder="I want a mentor that works in the Finance department and has experience in Financial Modelling"
-                onChange={e => setRequest(e.target.value)}
+                onChange={handleRoleChange}
                 value={request}
                 style={{ fontSize: '0.875rem' }} // Adjusting font size to ensure visibility
               ></textarea>
