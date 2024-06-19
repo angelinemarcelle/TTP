@@ -14,10 +14,10 @@ import SubmitSurvey from '../components/survey/SubmitSurvey';
 
 
 const SurveyPage = () => {
+    const [mentorRequest, setMentorRequest] = useState('mentorPrompt');
 
     const [surveyResponses, setSurveyResponses] = useState({
         buddy_id: 21,
-        mentorprompt: '',
         question1: '',
         question2: '',
         question3: '',
@@ -31,11 +31,15 @@ const SurveyPage = () => {
     const updateResponses = (key, value) => {
       setSurveyResponses(prev => ({ ...prev, [key]: value }));
     };
+
+    const updateMentorRequest = (value) => {
+        setMentorRequest(value);
+        console.log(mentorRequest)
+    };
   
     return (
       <div className="bg-grey">
-        <MentorPrompt updateResponses={updateResponses} />
-        <SurveyNo1 updateResponses={updateResponses} />
+        <MentorPrompt updateMentorRequest={updateMentorRequest} />        <SurveyNo1 updateResponses={updateResponses} />
         <SurveyNo2 updateResponses={updateResponses} />
         <SurveyNo3 updateResponses={updateResponses} />
         <SurveyNo4 updateResponses={updateResponses} />
@@ -45,7 +49,7 @@ const SurveyPage = () => {
         <SurveyNo8 updateResponses={updateResponses} />
 
         {/* Render other survey components with updateResponses passed as props */}
-        <SubmitSurvey surveyData={surveyResponses} />
+        <SubmitSurvey surveyData={surveyResponses} mentorRequest={mentorRequest} />
       </div>
     );
   };
