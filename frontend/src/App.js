@@ -11,6 +11,8 @@ import MentorBuddyPage from './pages/mentorbuddy_page';
 import EventsPage from './pages/events_page';
 import ErrorPage from './pages/error_page';
 import ArticlesPage from './pages/articles_page';
+import ArticleDetail from "./pages/articles_detail_page"
+
 import MatchedMentorship from './components/survey/MatchedMentorship';
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/mentorbuddy" element={<MentorBuddyPage />} />
         <Route path="/articles" element={<ArticlesPage />} />
+        <Route path="/articles/:articleId" element={<ArticleDetail />} />
         <Route path="/survey" element={<SurveyPrompt />} />
         <Route path="/fullsurvey" element={<SurveyPage />} />
         <Route path="/matched-mentorship" element={<MatchedMentorship />} />

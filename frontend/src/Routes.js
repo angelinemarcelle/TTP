@@ -3,6 +3,8 @@ import { HomePage } from "./pages/home_page"
 import { MentorBuddyPage } from "./pages/mentorbuddy_page"
 import { EventsPage } from "./pages/events_page"
 import { ErrorPage } from "./pages/error_page"
+import { ArticlesPage } from "./pages/articles_page"
+import { ArticleDetail } from "./pages/articles_detail_page"
 
 export const Routes = () => {
     return (
@@ -18,6 +20,8 @@ export const Routes = () => {
                 <Route path="/mentorbuddy">
                     <MentorBuddyPage />
                 </Route>
+                <Route path="/articles" element={<ArticlesPage />} />
+                <Route path="/articles/:articleId" element={<ArticleDetail />} />
                 <Route>
                     <ErrorPage/>
                 </Route>

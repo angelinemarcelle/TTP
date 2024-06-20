@@ -298,7 +298,7 @@ async def recommend_article(
         
         result = article_collection.query(
             query_texts=query_sentences,
-            n_results=3,
+            n_results=5,
         )
         
         recommended_article_ids = [int(article_id) for article_id in result['ids'][0]]
@@ -318,3 +318,30 @@ async def recommend_article(
         return {"message": "Error",
                 "error": str(e)}
 
+
+@app.get("/articles/")
+async def articles(
+    article_id: int,
+):
+    """
+    Get an article based on the given article ID.
+
+    Parameters:
+        article_id (int): The ID of the article.
+
+    Returns:
+        article: dictionary containing details of the article.
+    """
+
+    try:
+        
+        # Get user preferences
+        article_response = supabase_client.table("article").select("*").eq('article_id', article_id).execute()
+        article_details = article_response.model_dump()['data'][0]
+    
+        return article_details
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}
