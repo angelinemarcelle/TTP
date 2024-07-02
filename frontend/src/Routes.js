@@ -5,6 +5,8 @@ import { EventsPage } from "./pages/events_page"
 import { ErrorPage } from "./pages/error_page"
 import { ArticlesPage } from "./pages/articles_page"
 import { ArticleDetail } from "./pages/articles_detail_page"
+import { UpdateProfileBox } from "./components/UpdateProfileBox"
+import UserProfile from "./pages/user_profile"
 
 export const Routes = () => {
     return (
@@ -15,13 +17,21 @@ export const Routes = () => {
                 </Route>
                 <Route path="/events">
                     <EventsPage />
-                    
                 </Route>
                 <Route path="/mentorbuddy">
                     <MentorBuddyPage />
                 </Route>
-                <Route path="/articles" element={<ArticlesPage />} />
-                <Route path="/articles/:articleId" element={<ArticleDetail />} />
+                <Route path="/articles">
+                    <ArticlesPage />
+                </Route>
+                <Route path="/articles/:articleId">
+                    <ArticleDetail />
+                </Route>
+                <Route path="/profile">
+                    <UserProfile />
+                </Route>
+
+
                 <Route>
                     <ErrorPage/>
                 </Route>

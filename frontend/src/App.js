@@ -12,6 +12,7 @@ import EventsPage from './pages/events_page';
 import ErrorPage from './pages/error_page';
 import ArticlesPage from './pages/articles_page';
 import ArticleDetail from "./pages/articles_detail_page"
+import UserProfile from './pages/user_profile';
 
 import MatchedMentorship from './components/survey/MatchedMentorship';
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/survey" element={<SurveyPrompt />} />
         <Route path="/fullsurvey" element={<SurveyPage />} />
         <Route path="/matched-mentorship" element={<MatchedMentorship />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
