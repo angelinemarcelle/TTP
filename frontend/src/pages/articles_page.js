@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
 function ArticlesPage() {
@@ -29,7 +27,6 @@ function ArticlesPage() {
 
   return (
     <div>
-        <Navbar />
         <div className="p-8 mt-20">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {articles.map(article => (
@@ -42,7 +39,6 @@ function ArticlesPage() {
                 ))}
             </div>
         </div>
-        <Footer />
     </div>
 );
 }

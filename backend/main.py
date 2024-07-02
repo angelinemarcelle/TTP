@@ -345,3 +345,49 @@ async def articles(
     except Exception as e:
         return {"message": "Error",
                 "error": str(e)}
+
+@app.get("/mentors/")
+async def mentors(
+
+):
+    """
+    Objective:
+        returns list of mentors along with their information from Supabase
+
+    """
+
+    try:
+        
+        # Get user preferences
+        mentor_response = supabase_client.table("mentor").select("*").execute()
+        mentor_details = mentor_response.model_dump()['data']
+    
+        return mentor_details
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}
+
+@app.get("/buddies/")
+async def buddies(
+
+):
+    """
+    Objective:
+        returns list of buddies along with their information from Supabase
+
+    """
+
+    try:
+        
+        # Get user preferences
+        buddies_response = supabase_client.table("buddy").select("*").execute()
+        buddies_details = buddies_response.model_dump()['data']
+    
+        return buddies_details
+        
+    
+    except Exception as e:
+        return {"message": "Error",
+                "error": str(e)}

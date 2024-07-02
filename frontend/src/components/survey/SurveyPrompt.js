@@ -8,7 +8,7 @@ const SurveyPrompt = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-black">
+    <div className="flex justify-center items-center min-h-[70vh] bg-black">
       <div className="max-w-md text-center p-10 bg-white shadow-lg rounded-xl">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Help Us Match You Perfectly!</h1>
         <p className="text-gray-600 mb-6">

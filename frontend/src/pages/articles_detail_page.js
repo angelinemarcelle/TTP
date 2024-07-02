@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -39,13 +37,11 @@ function ArticleDetail() {
   
     return (
         <div>
-        <Navbar />
         <div className="p-8 mt-20">
             <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
             <p className="text-sm text-gray-500">By {article.author} - {new Date(article.created_date).toLocaleDateString()}</p>
             <p className="mt-4">{article.body}</p>
         </div>
-        <Footer />
     </div>
     );
   }
