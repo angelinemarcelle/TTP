@@ -1,7 +1,12 @@
-const EventsPage =() => {
+import React from 'react';
+import TimerCountdown from '../components/events/TimerCountdown';
+
+const EventsPage = () => {
     return (
-        <h1>Yo anani </h1>
-    )
-};
+        <div>
+            <TimerCountdown />
+        </div>
+    );
+}
 
 export default EventsPage;
