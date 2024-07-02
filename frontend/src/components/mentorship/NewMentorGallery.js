@@ -44,6 +44,10 @@ function MentorGallery() {
   return (
     <div className="w-80% min-h-[90vh] bg-black flex flex-col justify-center items-center p-4">
       <div className="text-center mb-10">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <h1 className="text-5xl font-bold text-white uppercase tracking-wider">Meet Your Mentors</h1>
         <p className="text-xl text-gray-300">Connect and get inspired!</p>
       </div>
@@ -55,7 +59,7 @@ function MentorGallery() {
             const mentor = mentors[idx];
             return (
               <div key={mentor.id} className="bg-white border border-gray-200 shadow-lg">
-                <img src={`https://via.placeholder.com/400x300?text=${mentor.name}`} alt={`Mentor ${mentor.name}`} className="w-full object-cover" />
+                <img src={`${mentor.name}.png`} alt={`Mentor ${mentor.name}`} className="w-full object-cover" />
                 <div className="p-5">
                   <p className="text-lg font-semibold text-gray-900">{mentor.name}</p>
                   <p className="text-sm font-semibold text-gray-700">{mentor.position} ({mentor.department})</p>
@@ -67,6 +71,9 @@ function MentorGallery() {
         </div>
       </div>
       <button onClick={nextSlide} className="absolute right-10 text-white text-3xl z-10 m-2 p-20 cursor-pointer">&#10095;</button>
+      <br></br>
+      <br></br>
+      <br></br>
     </div>
   );
 }
