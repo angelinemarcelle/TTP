@@ -17,7 +17,7 @@ const SurveyPage = () => {
     const [mentorRequest, setMentorRequest] = useState('mentorPrompt');
 
     const [surveyResponses, setSurveyResponses] = useState({
-        buddy_id: 21,
+        buddy_id: 1,
         question1: '',
         question2: '',
         question3: '',
@@ -39,7 +39,8 @@ const SurveyPage = () => {
   
     return (
       <div className="bg-grey">
-        <MentorPrompt updateMentorRequest={updateMentorRequest} />        <SurveyNo1 updateResponses={updateResponses} />
+        <MentorPrompt updateMentorRequest={updateMentorRequest} />       
+        <SurveyNo1 updateResponses={updateResponses} />
         <SurveyNo2 updateResponses={updateResponses} />
         <SurveyNo3 updateResponses={updateResponses} />
         <SurveyNo4 updateResponses={updateResponses} />
