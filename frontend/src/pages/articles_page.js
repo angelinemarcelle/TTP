@@ -39,6 +39,10 @@ function ArticlesPage() {
       });
   };
 
+  const handleDismiss = () => {
+    setShowPopup(false);
+  };
+
   // Hardcoded trending articles for demonstration
   const trendingArticles = [
     {
@@ -63,7 +67,7 @@ function ArticlesPage() {
 
   return (
     <div className="container mx-auto px-8 mt-20 flex justify-center">
-      {showPopup && <PreferencesPopup onSubmit={handlePreferencesSubmit} />}
+      {showPopup && <PreferencesPopup onSubmit={handlePreferencesSubmit} onDismiss={handleDismiss} />}
       <div className="max-w-5xl w-full flex justify-between">
         {/* Recommended Articles Column */}
         <div className="flex-1 max-w-2xl pr-8">

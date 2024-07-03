@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function PreferencesPopup({ onSubmit }) {
+function PreferencesPopup({ onSubmit, onDismiss }) {
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [customTopic, setCustomTopic] = useState('');
   const predefinedTopics = [
@@ -32,7 +32,13 @@ function PreferencesPopup({ onSubmit }) {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-3xl shadow-lg max-w-xl w-full">
+      <div className="bg-white p-8 rounded-3xl shadow-lg max-w-xl w-full relative">
+        <button 
+          className="absolute top-2 right-5 text-gray-500 hover:text-gray-700"
+          onClick={onDismiss}
+        >
+          &times;
+        </button>
         <h2 className="text-xl font-semibold mb-6">Select Your Topics of Interest</h2>
         <div className="flex flex-wrap gap-2 mb-4">
           {predefinedTopics.map(topic => (
