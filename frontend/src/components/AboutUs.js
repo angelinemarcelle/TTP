@@ -7,7 +7,7 @@ const AboutUs = () => {
       <div className="flex-1 flex justify-center items-center p-20">
         <img src={AboutUsImage} alt="About Us" className="max-w-full h-auto" />
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center p-10 pr-20">
+      <div className="flex-1 flex flex-col justify-center items-center pr-20">
         <h1 className="text-5xl font-bold mb-3 text-left">ABOUT US</h1><br></br>
         <p className="text-base mb-5 text-center">In Hong Kong, a major hub of Asia's financial markets, UBS has been a pillar of trust and expertise since 1939. Our team is committed to helping clients manage the complexities of finance, offering tailored services in wealth management, investment banking, and asset management. We cater to high-net-worth individuals, corporations, institutional investors, and government agencies, providing strategic insights and personalized solutions for success.<br></br><br></br>
         At UBS Hong Kong, we do more than handle transactions; we strive to make a meaningful impact through sustainable investing and advanced technology, enhancing the future for our clients and communities. With UBS, you're not just navigating the markets—you're advancing towards your goals with a dedicated partner.
