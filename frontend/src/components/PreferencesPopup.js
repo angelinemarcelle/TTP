@@ -6,7 +6,7 @@ function PreferencesPopup({ onSubmit }) {
   const predefinedTopics = [
     "Finance", "Banking", "Technology", "Accountancy",
     "Economy", "Environment", "Artificial Intelligence",
-    "Machine Learning", "Data Science", "Investing",
+    "Productivity", "Data Science", "Investing",
     "Trading", "Cryptocurrency"
   ];
 
