@@ -5,6 +5,8 @@ from fastapi import FastAPI
 from supabase import create_client
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+from typing import List
 
 from dotenv import load_dotenv 
 load_dotenv() 
@@ -288,7 +290,7 @@ async def recommend_article(
     try:
         
         # Get user preferences
-        user_info = supabase_client.table("user").select("*").eq('user_UID', 1).execute()
+        user_info = supabase_client.table("user").select("preferred_topic").eq('user_UID', 1).execute()
         preferred_topics = user_info.model_dump()['data'][0]['preferred_topic']
     
         # Get Collection
@@ -298,7 +300,7 @@ async def recommend_article(
         
         result = article_collection.query(
             query_texts=query_sentences,
-            n_results=5,
+            n_results=10,
         )
         
         recommended_article_ids = [int(article_id) for article_id in result['ids'][0]]
@@ -306,8 +308,9 @@ async def recommend_article(
         # Get detail from supabase
         recommended_articles = []
         for article_id in recommended_article_ids:
-            article_info = supabase_client.table("article").select("*").eq('article_id', article_id).execute()
-            recommended_articles.append(article_info.model_dump()['data'][0])
+            article_info = supabase_client.table("article").select("article_id, author, created_date, short_desc, title").eq('article_id', article_id).execute()
+            article_selected_info = article_info.model_dump()['data'][0]
+            recommended_articles.append(article_selected_info)
         
         return {
             "recommended_articles": recommended_articles,
@@ -347,9 +350,7 @@ async def articles(
                 "error": str(e)}
 
 @app.get("/mentors/")
-async def mentors(
-
-):
+async def mentors():
     """
     Objective:
         returns list of mentors along with their information from Supabase
@@ -368,6 +369,20 @@ async def mentors(
     except Exception as e:
         return {"message": "Error",
                 "error": str(e)}
+        
+class UserPreferences(BaseModel):
+    user_id: int
+    topics: List[str]
+            
+@app.post("/update_user_preferences")
+async def update_user_preferences(preferences: UserPreferences):
+    try:
+        response = supabase_client.table("user").update({"preferred_topic": preferences.topics}).eq("user_UID", preferences.user_id).execute()
+        return {"message": f"Preferences updated successfully: \n {response}"}
+    except Exception as e:
+        return {"message": "Error updating preferences", "error": str(e)}
+
+
 
 @app.get("/buddies/")
 async def buddies(
@@ -391,3 +406,6 @@ async def buddies(
     except Exception as e:
         return {"message": "Error",
                 "error": str(e)}
+        
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
