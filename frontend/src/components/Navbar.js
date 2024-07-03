@@ -7,7 +7,7 @@ function Navbar() {
     <div>
       <nav className="font-sans font-bold text-base flex w-full items-center justify-between bg-gray-200 bg-opacity-70 py-2 shadow-lg fixed top-0 pl-10 z-50">
         <div className="flex items-center px-3">
-          <a className="flex items-center" href="#">
+          <a className="flex items-center" href="/">
             <img
               className="mr-4 p-2"
               src={BlackUBS3KeysLogo}
