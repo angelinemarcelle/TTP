@@ -189,6 +189,8 @@ async def recommend_buddy(
     query_sentence = user['documents'][0]
     print(query_sentence)
 
+    
+
     # Get recommended buddy
     result = buddy_collection.query(
         query_texts=query_sentence,
@@ -214,12 +216,6 @@ async def recommend_buddy(
     }
 
     return response_body
-        
-    
-    # except Exception as e:
-    # #     return {"message": "Error",
-    # #             "error": str(e)}
-    
 
  
 @app.get("/recommend_mentor/")
@@ -376,6 +372,7 @@ class UserPreferences(BaseModel):
     user_id: int
     topics: List[str]
             
+
 @app.post("/update_user_preferences")
 async def update_user_preferences(preferences: UserPreferences):
     try:
@@ -383,7 +380,6 @@ async def update_user_preferences(preferences: UserPreferences):
         return {"message": f"Preferences updated successfully: \n {response}"}
     except Exception as e:
         return {"message": "Error updating preferences", "error": str(e)}
-
 
 
 @app.get("/buddies/")
