@@ -290,8 +290,10 @@ async def recommend_article(
     try:
         
         # Get user preferences
-        user_info = supabase_client.table("user").select("preferred_topic").eq('user_UID', 1).execute()
+        user_info = supabase_client.table("buddy").select("preferred_topic").eq('buddy_id', 1).execute()
         preferred_topics = user_info.model_dump()['data'][0]['preferred_topic']
+        
+        preferred_topics = [] if preferred_topics is None else preferred_topics
     
         # Get Collection
         article_collection = chroma_client.get_collection('article')
@@ -377,7 +379,7 @@ class UserPreferences(BaseModel):
 @app.post("/update_user_preferences")
 async def update_user_preferences(preferences: UserPreferences):
     try:
-        response = supabase_client.table("user").update({"preferred_topic": preferences.topics}).eq("user_UID", preferences.user_id).execute()
+        response = supabase_client.table("buddy").update({"preferred_topic": preferences.topics}).eq("buddy_id", preferences.user_id).execute()
         return {"message": f"Preferences updated successfully: \n {response}"}
     except Exception as e:
         return {"message": "Error updating preferences", "error": str(e)}

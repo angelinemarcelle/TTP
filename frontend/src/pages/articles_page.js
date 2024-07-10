@@ -10,7 +10,7 @@ function ArticlesPage() {
   const [showPopup, setShowPopup] = useState(true); // State to show/hide popup
 
   useEffect(() => {
-    fetchRecommendedArticles(1); // Assuming user ID is 1 as per your example
+    fetchRecommendedArticles(1); // Assuming user ID is 1 as per example
   }, []);
 
   const fetchRecommendedArticles = (userId) => {
